@@ -17,11 +17,11 @@ def solve_part_1(puzzle_input: List[str]):
         if matched:
             opponent = ord(matched.groups()[0]) - 65
             me = ord(matched.groups()[1]) - 88
-            score = me + 1
+
 
             win = determine_rock_paper_scissors(me, opponent)
 
-            score = score + 3 * (win + 1)
+            score = win * 3 + me + 1
 
             all_scores.append(score)
 
@@ -38,10 +38,9 @@ def solve_part_2(puzzle_input: List[str]):
             opponent = ord(matched.groups()[0]) - 65
             adv = ord(matched.groups()[1]) - 89
             me = get_fitting_option(opponent, adv)
-            score = me + 1
 
             win = determine_rock_paper_scissors(me, opponent)
-            score = score + 3 * (win + 1)
+            score = win * 3 + me + 1
 
             all_scores.append(score)
     return sum(all_scores)
@@ -61,9 +60,7 @@ def determine_rock_paper_scissors(a: int, b: int) -> int:
         :returns result of match: 1 if a won, -1 if b won, 0 if it was a draw
     """
 
-    res = (a - b + 3) % 3
-    return -1 if res == 2 else res
-
+    return (a - b + 1) % 3
 
 def get_fitting_option(opponent: int, advice: int) -> int:
     return (opponent + advice) % 3
