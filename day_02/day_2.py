@@ -49,7 +49,7 @@ def solve_part_2(puzzle_input: List[str]):
 def determine_rock_paper_scissors(a: int, b: int) -> int:
     """ Calculate the result of a Rock-Paper-Scissors Match in a overcomplicated
         arithmetic way by trying to make everything hard for yourself
-        while avoiding control structures and dictionary lookups (and fail on the last line).
+        while avoiding control structures and dictionary lookups.
 
         Input parameters are encoded as:
             0 -> rock
