@@ -17,12 +17,8 @@ def solve_part_1(puzzle_input: List[str]):
         if matched:
             opponent = ord(matched.groups()[0]) - 65
             me = ord(matched.groups()[1]) - 88
-
-
             win = determine_rock_paper_scissors(me, opponent)
-
             score = win * 3 + me + 1
-
             all_scores.append(score)
 
     return sum(all_scores)
@@ -38,7 +34,6 @@ def solve_part_2(puzzle_input: List[str]):
             opponent = ord(matched.groups()[0]) - 65
             adv = ord(matched.groups()[1]) - 89
             me = get_fitting_option(opponent, adv)
-
             win = determine_rock_paper_scissors(me, opponent)
             score = win * 3 + me + 1
 
