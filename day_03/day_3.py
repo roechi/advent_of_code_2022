@@ -13,6 +13,13 @@ def split_str(a_list: str):
     return a_list[:half], a_list[half:]
 
 
+def get_priority(item: str) -> int:
+    if item.islower():
+        return ord(item) - 96
+    else:
+        return  ord(item) - 65 + 27
+
+
 def solve_part_1(puzzle_input: List[str]):
 
     priorities = []
@@ -23,7 +30,7 @@ def solve_part_1(puzzle_input: List[str]):
             left_set = set(left)
             right_set = set(right)
 
-            intersection = set.intersection(left_set, right_set)
+            intersection = left_set & right_set
             assert len(intersection) == 1
 
             item = intersection.pop()
@@ -44,13 +51,6 @@ def solve_part_2(puzzle_input: List[str]):
         priorities.append(get_priority(item))
 
     return sum(priorities)
-
-
-def get_priority(item: str) -> int:
-    if item.islower():
-        return ord(item) - 96
-    else:
-        return  ord(item) - 65 + 27
 
 
 if __name__ == '__main__':
