@@ -8,11 +8,6 @@ def tokenize(puzzle_input):
     return [s for s in puzzle_input.split('\n')]
 
 
-def get_pattern():
-    pattern = re.compile('([0-9]+)-([0-9]+),([0-9]+)-([0-9]+)')
-    return pattern
-
-
 def solve_part_1(puzzle_input: List[str]):
     input_break = find_input_break(puzzle_input)
 
