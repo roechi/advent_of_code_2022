@@ -16,19 +16,15 @@ def build_grid(puzzle_input: list) -> list[list[int]]:
 
 
 def get_slices(grid, x, y) -> tuple[list[int], list[int], list[int], list[int]]:
-    up_slice = []
-    for yc in range(y):
-        up_slice.append(grid[yc][x])
-    down_slice = []
-    for yc in range(y + 1, len(grid)):
-        down_slice.append(grid[yc][x])
-    right_slice = []
-    for xc in range(x + 1, len(grid[0])):
-        right_slice.append(grid[y][xc])
-    left_slice = []
-    for xc in range(x):
-        left_slice.append(grid[y][xc])
-    return down_slice, left_slice, right_slice, up_slice
+    x_dim = grid[y]
+    y_dim = [grid[y_c][x] for y_c in range(len(grid))]
+
+    up_slice = y_dim[:y]
+    down_slice = y_dim[y + 1:]
+    left_slice = x_dim[:x]
+    right_slice = x_dim[x + 1:]
+
+    return up_slice, down_slice, left_slice, right_slice
 
 
 def is_visible_from(height, dir_slice) -> bool:
@@ -53,7 +49,7 @@ def solve_part_1(puzzle_input: list):
 
     for y in range(1, len(grid) - 1):
         for x in range(1, len(grid[0]) - 1):
-            down_slice, left_slice, right_slice, up_slice = get_slices(grid, x, y)
+            up_slice, down_slice, left_slice, right_slice = get_slices(grid, x, y)
 
             height = grid[y][x]
             if any([is_visible_from(height, slc) for slc in [up_slice, down_slice, left_slice, right_slice]]):
@@ -73,7 +69,7 @@ def solve_part_2(puzzle_input: list):
         for x in range(1, len(grid[0]) - 1):
             home_tree = grid[y][x]
 
-            down_slice, left_slice, right_slice, up_slice = get_slices(grid, x, y)
+            up_slice, down_slice, left_slice, right_slice = get_slices(grid, x, y)
             up_slice.reverse()
             left_slice.reverse()
 
